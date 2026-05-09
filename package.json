@@ -1,0 +1,12 @@
+{
+  "name": "four-seasons-photography",
+  "version": "1.0.0",
+  "description": "春·夏·秋·冬 — 王仁强个人摄影网站",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

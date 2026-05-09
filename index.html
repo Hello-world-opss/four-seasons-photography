@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>春·夏·秋·冬 — 王仁强摄影</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+:root {
+  --spring: #7a9e7e; --spring-light: #c5d8c5; --spring-accent: #e8c4c4;
+  --summer: #c49a3c; --summer-light: #f5e6c8; --summer-accent: #e07a5f;
+  --autumn: #c1703c; --autumn-light: #f0d5c0; --autumn-accent: #8b3a3a;
+  --winter: #6b8ba4; --winter-light: #d4e0e8; --winter-accent: #b8c9d6;
+  --paper: #faf8f5; --paper-dark: #f0ebe1; --ink: #1a1a1a;
+  --ink-light: #3a3a3a; --ink-muted: #6b6b6b; --gold: #b8963e;
+  --white: #ffffff; --border: rgba(0,0,0,0.08); --danger: #c0392b; --success: #2d6a4f;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;scroll-snap-type:y proximity;}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--paper);color:var(--ink);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* Grain */
+.grain{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0.04;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.5rem 3rem;display:flex;justify-content:space-between;align-items:center;mix-blend-mode:difference;transition:all .6s cubic-bezier(.22,1,.36,1);}
+.nav-brand{font-family:'Noto Serif SC',serif;font-size:1.25rem;font-weight:700;letter-spacing:.2em;color:#fff;text-decoration:none;}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center;}
+.nav-links a{color:#fff;text-decoration:none;font-size:.75rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;transition:opacity .3s;cursor:pointer;}
+.nav-links a:hover{opacity:.6;}
+.nav-links .admin-entry{font-size:.7rem;opacity:.5;margin-left:.5rem;}
+.nav-links .admin-entry:hover{opacity:.8;}
+.nav-toggle{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:1001;background:none;border:none;padding:.5rem;}
+.nav-toggle span{display:block;width:24px;height:1.5px;background:#fff;transition:all .3s;}
+
+/* Hero */
+.hero{height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;background:#1a1a1a;scroll-snap-align:start;}
+.hero-bg{position:absolute;inset:0;
+  background:radial-gradient(ellipse at 20% 50%,rgba(122,158,126,.3) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 80%,rgba(196,154,60,.2) 0%,transparent 50%),
+    radial-gradient(ellipse at 80% 30%,rgba(193,112,60,.25) 0%,transparent 50%),
+    radial-gradient(ellipse at 40% 20%,rgba(107,139,164,.3) 0%,transparent 50%);}
+.hero-content{text-align:center;position:relative;z-index:2;padding:2rem;}
+.hero-seasons{display:flex;gap:.8rem;justify-content:center;margin-bottom:2rem;opacity:0;animation:fadeUp 1s .3s forwards;}
+.hero-seasons span{width:12px;height:12px;border-radius:50%;display:block;}
+.hero-seasons span:nth-child(1){background:var(--spring);}
+.hero-seasons span:nth-child(2){background:var(--summer);}
+.hero-seasons span:nth-child(3){background:var(--autumn);}
+.hero-seasons span:nth-child(4){background:var(--winter);}
+.hero-title{font-family:'Noto Serif SC',serif;font-size:clamp(3.5rem,8vw,8rem);font-weight:900;color:#fff;letter-spacing:.15em;line-height:1.1;opacity:0;animation:fadeUp 1s .5s forwards;}
+.hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2vw,1.4rem);font-weight:300;font-style:italic;color:rgba(255,255,255,.5);letter-spacing:.3em;margin-top:1.5rem;opacity:0;animation:fadeUp 1s .7s forwards;}
+.hero-line{width:1px;height:80px;background:linear-gradient(to bottom,transparent,rgba(255,255,255,.3),transparent);margin:2.5rem auto;opacity:0;animation:fadeUp 1s .9s forwards;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+/* Magazine Spreads */
+.spread{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;position:relative;scroll-snap-align:start;}
+.spread.reverse{direction:rtl;}.spread.reverse>*{direction:ltr;}
+.spread-image{position:relative;overflow:hidden;min-height:100vh;}
+.spread-image .season-label{position:absolute;top:3rem;left:3rem;z-index:2;font-family:'Cormorant Garamond',serif;font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.9);padding:.5rem 1.2rem;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(10px);background:rgba(0,0,0,.15);}
+.spread-image .spread-bg-img{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .8s cubic-bezier(.22,1,.36,1);}
+.spread:hover .spread-bg-img{transform:scale(1.03);}
+.spread-text{display:flex;flex-direction:column;justify-content:center;padding:6rem 4rem;position:relative;}
+.spread-number{font-family:'Cormorant Garamond',serif;font-size:6rem;font-weight:700;color:rgba(0,0,0,.04);position:absolute;top:3rem;right:3rem;line-height:1;}
+.spread-text h2{font-family:'Noto Serif SC',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;letter-spacing:.1em;margin-bottom:1.5rem;line-height:1.2;}
+.spread-text .en-title{font-family:'Cormorant Garamond',serif;font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:.5rem;}
+.spread-text p{font-size:1rem;line-height:2;color:var(--ink-light);max-width:420px;margin-bottom:2rem;}
+.spread-text .deco-line{width:60px;height:1px;background:var(--ink);margin-bottom:2rem;opacity:.3;}
+.spread.spring .spread-image{background:linear-gradient(135deg,#4a6741,#7a9e7e,#a8c5a8);}
+.spread.spring .spread-image::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 30%,rgba(232,196,196,.3),transparent 60%);pointer-events:none;}
+.spread.summer .spread-image{background:linear-gradient(135deg,#8b6914,#c49a3c,#e6c864);}
+.spread.summer .spread-image::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 70%,rgba(224,122,95,.25),transparent 60%);pointer-events:none;}
+.spread.autumn .spread-image{background:linear-gradient(135deg,#6b2f1a,#c1703c,#d4956b);}
+.spread.autumn .spread-image::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 60% 40%,rgba(139,58,58,.25),transparent 60%);pointer-events:none;}
+.spread.winter .spread-image{background:linear-gradient(135deg,#3a5a70,#6b8ba4,#a0bcd0);}
+.spread.winter .spread-image::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(255,255,255,.15),transparent 60%);pointer-events:none;}
+
+/* Gallery */
+.gallery-section{padding:8rem 3rem;scroll-snap-align:start;}
+.gallery-header{text-align:center;margin-bottom:5rem;}
+.gallery-header h2{font-family:'Noto Serif SC',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:700;letter-spacing:.1em;}
+.gallery-header .en{font-family:'Cormorant Garamond',serif;font-size:.8rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-muted);margin-top:.5rem;}
+.gallery-header .album-tabs{display:flex;gap:1rem;justify-content:center;margin-top:2rem;flex-wrap:wrap;}
+.gallery-header .album-tab{padding:.5rem 1.5rem;border:1px solid var(--border);background:none;font-family:'Noto Sans SC',sans-serif;font-size:.8rem;cursor:pointer;letter-spacing:.05em;transition:all .3s;color:var(--ink-muted);}
+.gallery-header .album-tab:hover,.gallery-header .album-tab.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+.gallery-grid{display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:280px;gap:1.5rem;max-width:1400px;margin:0 auto;}
+.gallery-item{position:relative;overflow:hidden;cursor:pointer;border-radius:2px;}
+.gallery-item:nth-child(1){grid-column:span 5;grid-row:span 2;}
+.gallery-item:nth-child(2){grid-column:span 4;grid-row:span 2;}
+.gallery-item:nth-child(3){grid-column:span 3;grid-row:span 2;}
+.gallery-item:nth-child(4){grid-column:span 4;grid-row:span 2;}
+.gallery-item:nth-child(5){grid-column:span 4;grid-row:span 2;}
+.gallery-item:nth-child(6){grid-column:span 4;grid-row:span 2;}
+.gallery-item .img-bg{position:absolute;inset:0;background-size:cover;background-position:center;transition:transform .7s cubic-bezier(.22,1,.36,1);}
+.gallery-item:hover .img-bg{transform:scale(1.05);}
+.gallery-item .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.5) 0%,transparent 50%);opacity:0;transition:opacity .4s;display:flex;align-items:flex-end;padding:1.5rem;}
+.gallery-item:hover .overlay{opacity:1;}
+.gallery-item .overlay span{color:#fff;font-family:'Noto Serif SC',serif;font-size:.95rem;letter-spacing:.1em;}
+.gallery-item.spring-bg .img-bg{background:linear-gradient(160deg,#5a7a5e,#8db894,#c5d8c5,#e8c4c4);}
+.gallery-item.summer-bg .img-bg{background:linear-gradient(160deg,#9a782a,#d4a84c,#f5e6c8,#e07a5f);}
+.gallery-item.autumn-bg .img-bg{background:linear-gradient(160deg,#7a3a1a,#c1703c,#f0d5c0,#8b3a3a);}
+.gallery-item.winter-bg .img-bg{background:linear-gradient(160deg,#4a6a80,#7ba0b8,#d4e0e8,#b8c9d6);}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;z-index:10001;background:rgba(0,0,0,.92);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;flex-direction:column;}
+.lightbox.active{opacity:1;pointer-events:all;}
+.lightbox img{max-width:90vw;max-height:75vh;object-fit:contain;border-radius:2px;}
+.lightbox .lb-title{color:#fff;margin-top:1.5rem;font-family:'Noto Serif SC',serif;font-size:1.1rem;letter-spacing:.05em;}
+.lightbox .lb-close{position:absolute;top:2rem;right:2rem;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:none;cursor:pointer;color:#fff;font-size:1.3rem;transition:all .3s;}
+.lightbox .lb-close:hover{background:#fff;color:#000;}
+
+/* About */
+.about-section{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;background:var(--ink);color:#fff;scroll-snap-align:start;}
+.about-image{position:relative;overflow:hidden;background:linear-gradient(135deg,#2a2a2a,#1a1a1a,#3a3a3a);}
+.about-image .img-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(196,154,60,.15),transparent 60%),radial-gradient(ellipse at 70% 30%,rgba(107,139,164,.12),transparent 60%);}
+.about-text{display:flex;flex-direction:column;justify-content:center;padding:6rem 4rem;}
+.about-text .label{font-family:'Cormorant Garamond',serif;font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem;}
+.about-text h2{font-family:'Noto Serif SC',serif;font-size:clamp(2.5rem,5vw,4rem);font-weight:700;letter-spacing:.1em;line-height:1.3;margin-bottom:2rem;}
+.about-text .name-en{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:300;font-style:italic;color:rgba(255,255,255,.5);margin-bottom:2.5rem;}
+.about-text p{font-size:1rem;line-height:2;color:rgba(255,255,255,.6);max-width:420px;margin-bottom:2.5rem;}
+.about-info{display:grid;gap:1rem;max-width:420px;}
+.about-info .info-item{display:flex;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid rgba(255,255,255,.08);}
+.about-info .info-icon{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0;}
+.about-info .info-text{font-size:.85rem;color:rgba(255,255,255,.7);line-height:1.6;}
+
+/* CTA & Footer */
+.cta-section{min-height:50vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:6rem 2rem;background:var(--paper-dark);scroll-snap-align:start;}
+.cta-content h2{font-family:'Noto Serif SC',serif;font-size:clamp(2rem,4vw,3.5rem);font-weight:700;letter-spacing:.1em;margin-bottom:1rem;}
+.cta-content p{color:var(--ink-muted);font-size:1rem;margin-bottom:3rem;}
+.cta-buttons{display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;}
+.btn{padding:1rem 2.5rem;font-family:'Noto Sans SC',sans-serif;font-size:.85rem;font-weight:500;letter-spacing:.1em;cursor:pointer;border:none;transition:all .4s cubic-bezier(.22,1,.36,1);}
+.btn-primary{background:var(--ink);color:#fff;}.btn-primary:hover{background:#2a2a2a;transform:translateY(-2px);}
+.btn-outline{background:transparent;color:var(--ink);border:1px solid var(--ink);}.btn-outline:hover{background:var(--ink);color:#fff;transform:translateY(-2px);}
+.btn-sm{padding:.5rem 1.2rem;font-size:.75rem;}
+.btn-danger{background:var(--danger);color:#fff;}.btn-danger:hover{background:#a93226;}
+.btn-success{background:var(--success);color:#fff;}.btn-success:hover{background:#1e4a36;}
+.footer{padding:4rem 3rem 2rem;background:var(--ink);color:rgba(255,255,255,.5);}
+.footer-main{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4rem;max-width:1200px;margin:0 auto 4rem;}
+.footer-col h3{font-family:'Noto Serif SC',serif;color:#fff;font-size:1.1rem;letter-spacing:.1em;margin-bottom:1.5rem;}
+.footer-col p,.footer-col a{font-size:.85rem;line-height:2;color:rgba(255,255,255,.5);text-decoration:none;display:block;transition:color .3s;cursor:pointer;}
+.footer-col a:hover{color:#fff;}
+.footer-bottom{text-align:center;font-size:.75rem;padding-top:2rem;border-top:1px solid rgba(255,255,255,.08);max-width:1200px;margin:0 auto;}
+
+/* Public Modals */
+.modal-overlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.6);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s;}
+.modal-overlay.active{opacity:1;pointer-events:all;}
+.modal{background:#fff;border-radius:4px;padding:3rem;width:90%;max-width:500px;position:relative;transform:translateY(20px);transition:transform .4s cubic-bezier(.22,1,.36,1);max-height:90vh;overflow-y:auto;}
+.modal-overlay.active .modal{transform:translateY(0);}
+.modal-close{position:absolute;top:1.5rem;right:1.5rem;width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--ink);transition:all .3s;}
+.modal-close:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+.modal h2{font-family:'Noto Serif SC',serif;font-size:1.8rem;font-weight:700;letter-spacing:.05em;margin-bottom:.5rem;}
+.modal .modal-sub{font-family:'Cormorant Garamond',serif;font-size:.8rem;letter-spacing:.2em;color:var(--ink-muted);margin-bottom:2rem;}
+.form-group{margin-bottom:1.5rem;}
+.form-group label{display:block;font-size:.8rem;font-weight:500;letter-spacing:.05em;margin-bottom:.5rem;color:var(--ink-light);}
+.form-group input,.form-group textarea,.form-group select{width:100%;padding:.9rem 1rem;border:1px solid #e0ddd6;border-radius:2px;font-family:'Noto Sans SC',sans-serif;font-size:.9rem;background:var(--paper);transition:all .3s;color:var(--ink);outline:none;}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--ink);background:#fff;}
+.form-group textarea{resize:vertical;min-height:120px;}
+.form-submit{width:100%;padding:1rem;background:var(--ink);color:#fff;border:none;font-family:'Noto Sans SC',sans-serif;font-size:.9rem;font-weight:500;letter-spacing:.1em;cursor:pointer;transition:all .3s;border-radius:2px;}
+.form-submit:hover{background:#2a2a2a;}
+.form-footer{text-align:center;margin-top:1.5rem;font-size:.8rem;color:var(--ink-muted);}
+.form-footer a{color:var(--ink);text-decoration:underline;cursor:pointer;font-weight:500;}
+.toast{position:fixed;bottom:2rem;right:2rem;z-index:10002;background:var(--ink);color:#fff;padding:1rem 2rem;border-radius:2px;font-size:.85rem;letter-spacing:.05em;transform:translateY(100px);opacity:0;transition:all .4s cubic-bezier(.22,1,.36,1);}
+.toast.show{transform:translateY(0);opacity:1;}
+
+/* ===== ALBUM DETAIL PAGE ===== */
+.album-page{display:none;min-height:100vh;position:relative;}
+.album-page.active{display:block;}
+.album-page .album-hero{height:60vh;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
+.album-page .album-hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;}
+.album-page .album-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.2) 50%,rgba(0,0,0,.3) 100%);}
+.album-page .album-hero-info{position:relative;z-index:2;padding:4rem;color:#fff;}
+.album-page .album-hero-info h1{font-family:'Noto Serif SC',serif;font-size:clamp(2.5rem,6vw,5rem);font-weight:900;letter-spacing:.1em;}
+.album-page .album-hero-info .album-count{font-family:'Cormorant Garamond',serif;font-size:1rem;opacity:.6;margin-top:.5rem;letter-spacing:.1em;}
+.album-page .back-btn{position:absolute;top:2rem;left:2rem;z-index:10;color:#fff;text-decoration:none;font-size:.8rem;letter-spacing:.15em;padding:.6rem 1.5rem;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(10px);background:rgba(0,0,0,.2);cursor:pointer;transition:all .3s;font-family:'Noto Sans SC',sans-serif;}
+.album-page .back-btn:hover{background:rgba(255,255,255,.2);}
+
+/* BGM Player */
+.bgm-player{position:fixed;bottom:2rem;left:2rem;z-index:9998;display:flex;align-items:center;gap:.8rem;background:rgba(0,0,0,.7);backdrop-filter:blur(10px);padding:.6rem 1.2rem;border-radius:40px;color:#fff;font-size:.75rem;letter-spacing:.05em;opacity:0;pointer-events:none;transition:all .4s;}
+.bgm-player.visible{opacity:1;pointer-events:all;}
+.bgm-player .bgm-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.15);border:none;cursor:pointer;color:#fff;font-size:.9rem;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.bgm-player .bgm-btn:hover{background:rgba(255,255,255,.3);}
+.bgm-player .bgm-info{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.bgm-player .bgm-vol{width:60px;accent-color:#fff;}
+
+/* Album photo masonry */
+.album-masonry{columns:4;column-gap:1rem;padding:3rem;max-width:1600px;margin:0 auto;}
+.album-masonry .masonry-item{break-inside:avoid;margin-bottom:1rem;position:relative;overflow:hidden;border-radius:2px;cursor:pointer;}
+.album-masonry .masonry-item img{width:100%;display:block;transition:transform .6s cubic-bezier(.22,1,.36,1);}
+.album-masonry .masonry-item:hover img{transform:scale(1.04);}
+.album-masonry .masonry-item .masonry-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent 50%);opacity:0;transition:opacity .3s;display:flex;align-items:flex-end;padding:1rem;}
+.album-masonry .masonry-item:hover .masonry-overlay{opacity:1;}
+.album-masonry .masonry-item .masonry-overlay span{color:#fff;font-size:.85rem;font-family:'Noto Serif SC',serif;}
+
+/* ===== ADMIN PANEL ===== */
+.admin-overlay{position:fixed;inset:0;z-index:11000;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.admin-overlay.active{opacity:1;pointer-events:all;}
+.admin-panel{position:fixed;top:0;right:0;bottom:0;width:100%;max-width:1100px;background:#fff;z-index:11001;display:flex;flex-direction:column;transform:translateX(40px);opacity:0;transition:all .4s cubic-bezier(.22,1,.36,1);box-shadow:-10px 0 60px rgba(0,0,0,.15);}
+.admin-overlay.active .admin-panel{transform:translateX(0);opacity:1;}
+.admin-header{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;border-bottom:1px solid var(--border);background:var(--ink);color:#fff;flex-shrink:0;}
+.admin-header h2{font-family:'Noto Serif SC',serif;font-size:1.1rem;font-weight:600;letter-spacing:.1em;}
+.admin-header .admin-user{font-size:.8rem;color:rgba(255,255,255,.6);}
+.admin-close{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:none;cursor:pointer;color:#fff;font-size:1.1rem;transition:all .3s;flex-shrink:0;}
+.admin-close:hover{background:#fff;color:#000;}
+.admin-body{display:flex;flex:1;overflow:hidden;}
+.admin-sidebar{width:200px;border-right:1px solid var(--border);padding:1.5rem 0;flex-shrink:0;overflow-y:auto;}
+.admin-sidebar a{display:flex;align-items:center;gap:.6rem;padding:.8rem 1.5rem;font-size:.8rem;color:var(--ink-light);cursor:pointer;transition:all .2s;text-decoration:none;letter-spacing:.03em;border-left:2px solid transparent;}
+.admin-sidebar a:hover{background:var(--paper);color:var(--ink);}
+.admin-sidebar a.active{background:var(--paper);color:var(--ink);font-weight:600;border-left-color:var(--ink);}
+.admin-content{flex:1;overflow-y:auto;padding:2rem;background:var(--paper);}
+.admin-tab{display:none;}.admin-tab.active{display:block;}
+.admin-tab h3{font-family:'Noto Serif SC',serif;font-size:1.3rem;font-weight:700;margin-bottom:.3rem;}
+.admin-tab .tab-desc{font-size:.8rem;color:var(--ink-muted);margin-bottom:2rem;}
+.admin-card{background:#fff;border-radius:4px;padding:1.5rem;margin-bottom:1.5rem;border:1px solid var(--border);}
+.admin-card h4{font-family:'Noto Serif SC',serif;font-size:1rem;margin-bottom:1rem;letter-spacing:.05em;}
+.admin-table{width:100%;border-collapse:collapse;font-size:.8rem;}
+.admin-table th{text-align:left;padding:.8rem;border-bottom:2px solid var(--border);font-weight:600;color:var(--ink-light);letter-spacing:.05em;font-size:.75rem;text-transform:uppercase;}
+.admin-table td{padding:.8rem;border-bottom:1px solid var(--border);}
+.admin-table tr:hover td{background:var(--paper);}
+.badge{display:inline-block;padding:.2rem .7rem;border-radius:20px;font-size:.7rem;font-weight:600;letter-spacing:.05em;}
+.badge-pending{background:#fef3cd;color:#856404;}.badge-approved{background:#d4edda;color:#155724;}.badge-rejected{background:#f8d7da;color:#721c24;}
+.badge-admin{background:#d4edda;color:#155724;}.badge-coadmin{background:#cce5ff;color:#004085;}.badge-member{background:#e2e3e5;color:#383d41;}
+.admin-form-row{display:flex;gap:.8rem;align-items:flex-end;flex-wrap:wrap;margin-bottom:1rem;}
+.admin-form-row .form-group{margin-bottom:0;flex:1;min-width:150px;}
+.admin-form-row .form-group input,.admin-form-row .form-group select{padding:.65rem .8rem;font-size:.8rem;}
+.admin-photo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:1rem;}
+.admin-photo-card{background:#fff;border:1px solid var(--border);border-radius:4px;overflow:hidden;position:relative;}
+.admin-photo-card .thumb{width:100%;height:140px;background-size:cover;background-position:center;}
+.admin-photo-card .info{padding:.7rem;}
+.admin-photo-card .info .title{font-size:.8rem;font-weight:500;margin-bottom:.2rem;}
+.admin-photo-card .info .season{font-size:.7rem;color:var(--ink-muted);}
+.admin-photo-card .actions{display:flex;gap:.3rem;padding:0 .7rem .7rem;}
+.admin-photo-card .actions button{flex:1;padding:.35rem;font-size:.7rem;border:1px solid var(--border);background:#fff;cursor:pointer;border-radius:2px;transition:all .2s;}
+.admin-photo-card .actions button:hover{background:var(--ink);color:#fff;border-color:var(--ink);}
+.admin-photo-card .actions button.danger:hover{background:var(--danger);border-color:var(--danger);}
+.admin-login-box{background:#fff;padding:2.5rem;border-radius:6px;width:90%;max-width:380px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.2);}
+.admin-login-box h3{font-family:'Noto Serif SC',serif;font-size:1.3rem;margin-bottom:.5rem;}
+.admin-login-box p{font-size:.8rem;color:var(--ink-muted);margin-bottom:1.5rem;}
+.stats-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem;margin-bottom:2rem;}
+.stat-card{background:#fff;padding:1.3rem;border-radius:4px;border:1px solid var(--border);text-align:center;}
+.stat-card .stat-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;line-height:1;}
+.stat-card .stat-label{font-size:.75rem;color:var(--ink-muted);margin-top:.3rem;letter-spacing:.05em;}
+
+/* Upload zone */
+.upload-zone{border:2px dashed #d0ccc4;border-radius:8px;padding:3rem 2rem;text-align:center;transition:all .3s;cursor:pointer;background:var(--paper);margin-bottom:1rem;}
+.upload-zone:hover,.upload-zone.drag-over{border-color:var(--ink);background:#fff;}
+.upload-zone .upload-icon{font-size:2.5rem;margin-bottom:.5rem;}
+.upload-zone p{font-size:.85rem;color:var(--ink-muted);}
+.upload-zone .upload-hint{font-size:.75rem;color:var(--ink-muted);margin-top:.5rem;opacity:.7;}
+.upload-preview{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;}
+.upload-preview .preview-item{width:80px;height:80px;border-radius:4px;background-size:cover;background-position:center;position:relative;border:1px solid var(--border);}
+.upload-preview .preview-item .remove{position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;background:var(--danger);color:#fff;border:none;cursor:pointer;font-size:.65rem;display:flex;align-items:center;justify-content:center;}
+
+/* ===== Responsive ===== */
+@media(max-width:1024px){
+  .spread{grid-template-columns:1fr;grid-template-rows:50vh auto;}
+  .spread-image{min-height:50vh;}
+  .spread-text{padding:4rem 2rem;}
+  .spread-number{font-size:4rem;top:2rem;right:2rem;}
+  .about-section{grid-template-columns:1fr;grid-template-rows:50vh auto;}
+  .about-text{padding:4rem 2rem;}
+  .gallery-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:200px;}
+  .gallery-item:nth-child(1){grid-column:span 3;grid-row:span 2;}
+  .gallery-item:nth-child(2){grid-column:span 3;grid-row:span 2;}
+  .gallery-item:nth-child(3){grid-column:span 6;grid-row:span 1;}
+  .gallery-item:nth-child(4){grid-column:span 3;grid-row:span 2;}
+  .gallery-item:nth-child(5){grid-column:span 3;grid-row:span 2;}
+  .gallery-item:nth-child(6){grid-column:span 6;grid-row:span 1;}
+  .footer-main{grid-template-columns:1fr;gap:2rem;}
+  .nav{padding:1rem 1.5rem;}
+  .nav-links{display:none;}
+  .nav-toggle{display:flex;}
+  .nav.mobile-open .nav-links{display:flex;flex-direction:column;position:fixed;inset:0;background:rgba(0,0,0,.95);align-items:center;justify-content:center;gap:2rem;}
+  .admin-panel{max-width:100%;}
+  .admin-sidebar{width:150px;}
+  .admin-sidebar a{padding:.7rem 1rem;font-size:.75rem;}
+  .album-masonry{columns:3;padding:2rem;}
+  .album-page .album-hero{height:45vh;}
+  .album-page .album-hero-info{padding:2rem;}
+}
+@media(max-width:640px){
+  .hero-title{font-size:2.8rem;}
+  .spread-text{padding:3rem 1.5rem;}
+  .spread-text h2{font-size:2rem;}
+  .about-text{padding:3rem 1.5rem;}.about-text h2{font-size:2rem;}
+  .gallery-section{padding:4rem 1rem;}
+  .gallery-grid{gap:.8rem;grid-auto-rows:160px;}
+  .cta-buttons{flex-direction:column;align-items:center;}
+  .btn{width:100%;max-width:300px;}
+  .modal{padding:2rem;width:95%;}
+  .admin-body{flex-direction:column;}
+  .admin-sidebar{width:100%;display:flex;overflow-x:auto;padding:.5rem;border-right:none;border-bottom:1px solid var(--border);}
+  .admin-sidebar a{border-left:none;border-bottom:2px solid transparent;white-space:nowrap;flex-shrink:0;font-size:.75rem;padding:.6rem 1rem;}
+  .admin-sidebar a.active{border-left-color:transparent;border-bottom-color:var(--ink);}
+  .admin-content{padding:1rem;}
+  .admin-photo-grid{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));}
+  .stats-row{grid-template-columns:repeat(2,1fr);}
+  .album-masonry{columns:2;padding:1rem;}
+  .album-page .album-hero{height:35vh;}
+  .album-page .album-hero-info h1{font-size:2rem;}
+  .bgm-player{bottom:1rem;left:1rem;padding:.4rem 1rem;}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- ===== BGM Player ===== -->
+<div class="bgm-player" id="bgmPlayer">
+  <button class="bgm-btn" id="bgmToggle" onclick="toggleBGM()">&#9654;</button>
+  <div class="bgm-info" id="bgmInfo">未设置BGM</div>
+  <input type="range" class="bgm-vol" id="bgmVolume" min="0" max="100" value="50" oninput="setBGMVolume(this.value)" title="音量">
+  <button class="bgm-btn" onclick="stopBGM()" style="font-size:.7rem;">&#9632;</button>
+</div>
+<audio id="bgmAudio" loop style="display:none;"></audio>
+
+<!-- ===== Nav ===== -->
+<nav class="nav" id="nav">
+  <a href="#" class="nav-brand" onclick="showMainSite()">春·夏·秋·冬</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a onclick="scrollToSection('spring')">春</a></li>
+    <li><a onclick="scrollToSection('summer')">夏</a></li>
+    <li><a onclick="scrollToSection('autumn')">秋</a></li>
+    <li><a onclick="scrollToSection('winter')">冬</a></li>
+    <li><a onclick="scrollToSection('gallery')">作品集</a></li>
+    <li><a onclick="scrollToSection('about')">关于</a></li>
+    <li><a onclick="openModal('register')">注册</a></li>
+    <li><a onclick="openModal('submit')">投稿</a></li>
+    <li><a class="admin-entry" onclick="openAdmin()">管理</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" onclick="toggleMobileNav()"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- ===== Main Site ===== -->
+<div id="mainSite">
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-seasons"><span></span><span></span><span></span><span></span></div>
+    <h1 class="hero-title">春·夏·秋·冬</h1>
+    <p class="hero-subtitle">Wang Renqiang — Photography &amp; Visual Poetry</p>
+    <div class="hero-line"></div>
+  </div>
+</section>
+
+<section class="spread spring" id="spring">
+  <div class="spread-image" id="spreadImageSpring"><span class="season-label">SPRING</span></div>
+  <div class="spread-text">
+    <span class="en-title">Chapter One</span><h2>春</h2><div class="deco-line"></div>
+    <p id="spreadDescSpring"></p>
+  </div><div class="spread-number">01</div>
+</section>
+<section class="spread summer reverse" id="summer">
+  <div class="spread-image" id="spreadImageSummer"><span class="season-label">SUMMER</span></div>
+  <div class="spread-text">
+    <span class="en-title">Chapter Two</span><h2>夏</h2><div class="deco-line"></div>
+    <p id="spreadDescSummer"></p>
+  </div><div class="spread-number">02</div>
+</section>
+<section class="spread autumn" id="autumn">
+  <div class="spread-image" id="spreadImageAutumn"><span class="season-label">AUTUMN</span></div>
+  <div class="spread-text">
+    <span class="en-title">Chapter Three</span><h2>秋</h2><div class="deco-line"></div>
+    <p id="spreadDescAutumn"></p>
+  </div><div class="spread-number">03</div>
+</section>
+<section class="spread winter reverse" id="winter">
+  <div class="spread-image" id="spreadImageWinter"><span class="season-label">WINTER</span></div>
+  <div class="spread-text">
+    <span class="en-title">Chapter Four</span><h2>冬</h2><div class="deco-line"></div>
+    <p id="spreadDescWinter"></p>
+  </div><div class="spread-number">04</div>
+</section>
+
+<section class="gallery-section" id="gallery">
+  <div class="gallery-header">
+    <h2>作品集</h2><p class="en">Selected Works</p>
+    <div class="album-tabs" id="albumTabs"></div>
+  </div>
+  <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<section class="about-section" id="about">
+  <div class="about-image"><div class="img-overlay"></div></div>
+  <div class="about-text">
+    <span class="label">About the Photographer</span><h2>王仁强</h2>
+    <p class="name-en">Wang Renqiang</p>
+    <p>生于洛阳，长于洛阳。用镜头记录这座千年古都的四季流转，捕捉时间在光影中留下的痕迹。摄影是关于光与时间的艺术，而洛阳，是这两个元素最美的交汇点。</p>
+    <div class="about-info">
+      <div class="info-item"><div class="info-icon">&#9993;</div><div class="info-text">2041902160@qq.com</div></div>
+      <div class="info-item"><div class="info-icon">&#9742;</div><div class="info-text">19562530618</div></div>
+      <div class="info-item"><div class="info-icon">&#9962;</div><div class="info-text">中国·洛阳</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-content">
+    <h2>加入我们的旅程</h2>
+    <p>注册成为会员，或投稿你的摄影作品，一起分享洛阳的四季之美</p>
+    <div class="cta-buttons">
+      <button class="btn btn-primary" onclick="openModal('register')">会员注册</button>
+      <button class="btn btn-outline" onclick="openModal('submit')">作品投稿</button>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-main">
+    <div class="footer-col"><h3>春·夏·秋·冬</h3><p>王仁强摄影工作室<br>用镜头记录洛阳四季</p></div>
+    <div class="footer-col"><h3>联系方式</h3><p>邮箱：2041902160@qq.com</p><p>电话：19562530618</p><p>地址：中国·洛阳</p></div>
+    <div class="footer-col"><h3>快速导航</h3><a onclick="scrollToSection('spring')">春</a><a onclick="scrollToSection('summer')">夏</a><a onclick="scrollToSection('autumn')">秋</a><a onclick="scrollToSection('winter')">冬</a><a onclick="openAdmin()">网站管理</a></div>
+  </div>
+  <div class="footer-bottom"><p>&copy; 2026 春·夏·秋·冬 — 王仁强摄影. All rights reserved.</p></div>
+</footer>
+</div>
+
+<!-- ===== Album Pages Container ===== -->
+<div id="albumPages"></div>
+
+<!-- ===== Modals ===== -->
+<div class="modal-overlay" id="registerModal"><div class="modal">
+  <button class="modal-close" onclick="closeModal('register')">&times;</button>
+  <h2>会员注册</h2><p class="modal-sub">Join the community</p>
+  <form id="registerForm" onsubmit="handleRegister(event)">
+    <div class="form-group"><label>姓名</label><input type="text" id="regName" placeholder="请输入您的姓名" required></div>
+    <div class="form-group"><label>邮箱</label><input type="email" id="regEmail" placeholder="请输入邮箱地址" required></div>
+    <div class="form-group"><label>手机号</label><input type="tel" id="regPhone" placeholder="请输入手机号码"></div>
+    <div class="form-group"><label>密码</label><input type="password" id="regPassword" placeholder="请设置密码（至少6位）" minlength="6" required></div>
+    <button type="submit" class="form-submit">注 册</button>
+    <p class="form-footer">已有账号？<a onclick="switchModal('register','login')">立即登录</a></p>
+  </form>
+</div></div>
+
+<div class="modal-overlay" id="loginModal"><div class="modal">
+  <button class="modal-close" onclick="closeModal('login')">&times;</button>
+  <h2>会员登录</h2><p class="modal-sub">Welcome back</p>
+  <form id="loginForm" onsubmit="handleLogin(event)">
+    <div class="form-group"><label>邮箱</label><input type="email" id="loginEmail" placeholder="请输入注册邮箱" required></div>
+    <div class="form-group"><label>密码</label><input type="password" id="loginPassword" placeholder="请输入密码" required></div>
+    <button type="submit" class="form-submit">登 录</button>
+    <p class="form-footer">还没有账号？<a onclick="switchModal('login','register')">立即注册</a></p>
+  </form>
+</div></div>
+
+<div class="modal-overlay" id="submitModal"><div class="modal">
+  <button class="modal-close" onclick="closeModal('submit')">&times;</button>
+  <h2>作品投稿</h2><p class="modal-sub">Submit your work</p>
+  <form id="submitForm" onsubmit="handleSubmit(event)">
+    <div class="form-group"><label>作者姓名</label><input type="text" id="subName" placeholder="请输入您的姓名" required></div>
+    <div class="form-group"><label>联系邮箱</label><input type="email" id="subEmail" placeholder="请输入联系邮箱" required></div>
+    <div class="form-group"><label>作品主题</label><select id="subSeason" required><option value="">请选择作品主题</option><option value="spring">春</option><option value="summer">夏</option><option value="autumn">秋</option><option value="winter">冬</option><option value="other">其他</option></select></div>
+    <div class="form-group"><label>作品链接</label><input type="url" id="subLink" placeholder="请输入作品集链接或网盘地址" required></div>
+    <div class="form-group"><label>作品说明</label><textarea id="subDesc" placeholder="请简要描述您的作品……" required></textarea></div>
+    <button type="submit" class="form-submit">提交投稿</button>
+  </form>
+</div></div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lb-close" onclick="closeLightbox()">&times;</button>
+  <img src="" alt="" id="lbImg"><div class="lb-title" id="lbTitle"></div>
+</div>
+
+<!-- ===== Admin Overlay ===== -->
+<div class="admin-overlay" id="adminOverlay"><div class="admin-panel" id="adminPanel">
+  <div class="admin-header">
+    <div><h2>网站管理中心</h2><span class="admin-user" id="adminUserLabel">王仁强 · 管理员</span></div>
+    <button class="admin-close" onclick="closeAdmin()">&times;</button>
+  </div>
+  <div class="admin-body">
+    <nav class="admin-sidebar" id="adminSidebar"></nav>
+    <div class="admin-content" id="adminContent"></div>
+  </div>
+</div></div>
+
+<div class="admin-overlay" id="adminLoginOverlay"><div class="admin-login-box">
+  <h3>管理登录</h3><p>请输入账号密码进入后台</p>
+  <form onsubmit="adminLogin(event)">
+    <div class="form-group"><input type="email" id="adminLoginEmail" placeholder="管理员邮箱" required style="text-align:center;"></div>
+    <div class="form-group"><input type="password" id="adminLoginPassword" placeholder="密码" required style="text-align:center;"></div>
+    <button type="submit" class="form-submit">登 录</button>
+  </form>
+  <p style="margin-top:1rem;font-size:.75rem;color:var(--ink-muted);">主管理员：2041902160@qq.com / admin123</p>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// =========================== DATA LAYER ===========================
+const STORAGE_KEY = 'fourSeasons_v2';
+const DB_NAME = 'FourSeasonsImages';
+const DB_VERSION = 1;
+
+function getDefaultData() {
+  return {
+    adminPassword: 'admin123',
+    adminEmail: '2041902160@qq.com',
+    emailConfig: { publicKey:'', serviceId:'', templateId:'', fromName:'春·夏·秋·冬', fromEmail:'2041902160@qq.com' },
+    submissions: [],
+    albums: [
+      { id:'album-spring', name:'春 · 万物生', season:'spring', cover:'', bgm:'', photos:[] },
+      { id:'album-summer', name:'夏 · 炽热诗', season:'summer', cover:'', bgm:'', photos:[] },
+      { id:'album-autumn', name:'秋 · 落叶赋', season:'autumn', cover:'', bgm:'', photos:[] },
+      { id:'album-winter', name:'冬 · 寂静歌', season:'winter', cover:'', bgm:'', photos:[] }
+    ],
+    spreadImages: { spring:'', summer:'', autumn:'', winter:'' },
+    spreadDescriptions: {
+      spring:'万物复苏，光影在嫩绿间流转。洛阳的春天从龙门山的第一缕晨光开始，到洛河畔的樱花雨落下。每一帧都是生命的序章，每一次快门都是与自然的低语。',
+      summer:'烈日下的浓影，暮色中的金色时刻。洛阳的夏日，是天堂明堂在夕阳下的剪影，是应天门广场的热浪蒸腾。镜头里的夏天，炽热而纯粹。',
+      autumn:'层林尽染，洛阳城在金黄与深红中沉醉。白马寺的银杏铺满庭院，老城的青石板路落满梧桐。秋天是摄影师最钟情的季节，每一片落叶都是构图的诗篇。',
+      winter:'雪落无声，千年古都在纯白中归于沉静。龙门石窟的佛面覆上薄雪，洛河冰封如镜。冬日的镜头语言是留白，是极简，是万籁俱寂中的力量。'
+    },
+    users: [],
+    adminSettings: { siteTitle:'春·夏·秋·冬', photographerName:'王仁强' }
+  };
+}
+
+let APP_DATA = getDefaultData();
+const loaded = localStorage.getItem(STORAGE_KEY);
+if (loaded) {
+  try {
+    const parsed = JSON.parse(loaded);
+    APP_DATA = Object.assign(getDefaultData(), parsed);
+    APP_DATA.albums = APP_DATA.albums || getDefaultData().albums;
+  } catch(e) { APP_DATA = getDefaultData(); }
+}
+
+function persist() { localStorage.setItem(STORAGE_KEY, JSON.stringify(APP_DATA)); }
+
+// =========================== INDEXEDDB FOR IMAGES ===========================
+function openImageDB() {
+  return new Promise((resolve, reject) => {
+    const req = indexedDB.open(DB_NAME, DB_VERSION);
+    req.onupgradeneeded = e => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains('images')) db.createObjectStore('images', { keyPath:'id' });
+    };
+    req.onsuccess = e => resolve(e.target.result);
+    req.onerror = e => reject(e.target.error);
+  });
+}
+
+async function saveImageToDB(id, dataUrl) {
+  const db = await openImageDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('images', 'readwrite');
+    tx.objectStore('images').put({ id, dataUrl, savedAt: Date.now() });
+    tx.oncomplete = () => resolve();
+    tx.onerror = e => reject(e.target.error);
+  });
+}
+
+async function getImageFromDB(id) {
+  const db = await openImageDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('images', 'readonly');
+    const req = tx.objectStore('images').get(id);
+    req.onsuccess = () => resolve(req.result ? req.result.dataUrl : null);
+    req.onerror = e => reject(e.target.error);
+  });
+}
+
+async function deleteImageFromDB(id) {
+  const db = await openImageDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('images', 'readwrite');
+    tx.objectStore('images').delete(id);
+    tx.oncomplete = () => resolve();
+    tx.onerror = e => reject(e.target.error);
+  });
+}
+
+// =========================== INIT ===========================
+function initEmailJS() {
+  if (APP_DATA.emailConfig.publicKey) {
+    try { emailjs.init(APP_DATA.emailConfig.publicKey); } catch(e) {}
+  }
+}
+
+function initSite() {
+  renderSpreadsFromData();
+  renderGalleryFromData();
+  initEmailJS();
+}
+
+// =========================== SPREADS ===========================
+function renderSpreadsFromData() {
+  ['spring','summer','autumn','winter'].forEach(s => {
+    const cap = s.charAt(0).toUpperCase() + s.slice(1);
+    const imgEl = document.getElementById('spreadImage'+cap);
+    const descEl = document.getElementById('spreadDesc'+cap);
+    if (descEl) descEl.textContent = APP_DATA.spreadDescriptions[s] || '';
+    if (imgEl) {
+      const existing = imgEl.querySelector('.spread-bg-img');
+      if (APP_DATA.spreadImages[s]) {
+        if (existing) existing.style.backgroundImage = `url(${APP_DATA.spreadImages[s]})`;
+        else {
+          const bg = document.createElement('div'); bg.className='spread-bg-img';
+          bg.style.backgroundImage = `url(${APP_DATA.spreadImages[s]})`;
+          imgEl.appendChild(bg);
+        }
+      }
+    }
+  });
+}
+
+// =========================== GALLERY ===========================
+let currentAlbumFilter = 'all';
+
+function renderGalleryFromData(filterSeason) {
+  const grid = document.getElementById('galleryGrid');
+  const tabs = document.getElementById('albumTabs');
+  if (!grid || !tabs) return;
+  const season = filterSeason || currentAlbumFilter || 'all';
+  currentAlbumFilter = season;
+
+  let photos = [];
+  if (season === 'all') {
+    APP_DATA.albums.forEach(a => photos.push(...a.photos.map(p => ({...p, albumSeason:a.season, albumId:a.id}))));
+  } else {
+    const album = APP_DATA.albums.find(a => a.season === season || a.id === season);
+    if (album) photos = album.photos.map(p => ({...p, albumSeason:album.season, albumId:album.id}));
+  }
+
+  let tabsHTML = '<button class="album-tab'+(season==='all'?' active':'')+'" onclick="renderGalleryFromData(\'all\')">全部作品</button>';
+  APP_DATA.albums.forEach(a => {
+    tabsHTML += '<button class="album-tab'+(season===a.season?' active':'')+'" onclick="renderGalleryFromData(\''+a.season+'\')">'+escHtml(a.name)+'</button>';
+    tabsHTML += ' <a href="#/album/'+a.id+'" style="font-size:.7rem;color:var(--ink-muted);text-decoration:none;" title="打开独立图集页">&#8599;</a> ';
+  });
+  tabs.innerHTML = tabsHTML;
+
+  if (photos.length === 0) {
+    grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:4rem;color:var(--ink-muted);">该图集中暂无照片</div>';
+    return;
+  }
+  const displayPhotos = photos.slice(0, 6);
+  const layoutClasses = ['spring-bg','summer-bg','autumn-bg','winter-bg'];
+  grid.innerHTML = displayPhotos.map((p, i) => {
+    const bgStyle = p.url ? `background-image:url(${p.url});` : '';
+    return `<div class="gallery-item ${layoutClasses[i%4]}" onclick="openLightbox('${p.url}','${escHtml(p.title||'')}')">
+      <div class="img-bg" style="${bgStyle}"></div><div class="overlay"><span>${escHtml(p.title||'')}</span></div></div>`;
+  }).join('');
+}
+
+function openLightbox(url, title) {
+  if (!url) return;
+  document.getElementById('lbImg').src = url;
+  document.getElementById('lbTitle').textContent = title || '';
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// =========================== ALBUM PAGES + BGM ===========================
+let currentAlbumPage = null;
+
+function showAlbumPage(albumId) {
+  const album = APP_DATA.albums.find(a => a.id === albumId);
+  if (!album) { showMainSite(); return; }
+  currentAlbumPage = albumId;
+
+  document.getElementById('mainSite').style.display = 'none';
+  document.getElementById('nav').style.display = 'none';
+  document.getElementById('albumPages').style.display = 'block';
+
+  const seasonColors = {
+    spring: 'linear-gradient(135deg,#4a6741,#7a9e7e,#a8c5a8)',
+    summer: 'linear-gradient(135deg,#8b6914,#c49a3c,#e6c864)',
+    autumn: 'linear-gradient(135deg,#6b2f1a,#c1703c,#d4956b)',
+    winter: 'linear-gradient(135deg,#3a5a70,#6b8ba4,#a0bcd0)'
+  };
+
+  document.getElementById('albumPages').innerHTML = `
+    <div class="album-page active" id="albumPage_${album.id}">
+      <button class="back-btn" onclick="showMainSite()">&larr; 返回首页</button>
+      <div class="album-hero">
+        <div class="album-hero-bg" style="background:${seasonColors[album.season]||seasonColors.spring};${album.cover?'background-image:url('+album.cover+');background-size:cover;':''}"></div>
+        <div class="album-hero-overlay"></div>
+        <div class="album-hero-info">
+          <h1>${escHtml(album.name)}</h1>
+          <div class="album-count">${album.photos.length} 张作品</div>
+        </div>
+      </div>
+      <div class="album-masonry">
+        ${album.photos.length === 0
+          ? '<div style="text-align:center;padding:4rem;color:var(--ink-muted);grid-column:1/-1;">该图集暂无照片</div>'
+          : album.photos.map(p => `
+            <div class="masonry-item" onclick="openLightbox('${p.url}','${escHtml(p.title||'')}')">
+              <img src="${p.url}" alt="${escHtml(p.title||'')}" loading="lazy">
+              <div class="masonry-overlay"><span>${escHtml(p.title||'')}</span></div>
+            </div>`).join('')
+        }
+      </div>
+    </div>`;
+
+  // BGM
+  if (album.bgm) {
+    const audio = document.getElementById('bgmAudio');
+    audio.src = album.bgm;
+    audio.volume = 0.5;
+    audio.play().catch(() => {});
+    document.getElementById('bgmPlayer').classList.add('visible');
+    document.getElementById('bgmInfo').textContent = 'BGM: '+album.name;
+    document.getElementById('bgmToggle').innerHTML = '&#9646;&#9646;';
+  } else {
+    stopBGM();
+    document.getElementById('bgmPlayer').classList.remove('visible');
+  }
+  window.scrollTo(0, 0);
+}
+
+function showMainSite() {
+  currentAlbumPage = null;
+  document.getElementById('mainSite').style.display = '';
+  document.getElementById('nav').style.display = '';
+  document.getElementById('albumPages').style.display = 'none';
+  document.getElementById('albumPages').innerHTML = '';
+  stopBGM();
+  document.getElementById('bgmPlayer').classList.remove('visible');
+  renderGalleryFromData();
+}
+
+function toggleBGM() {
+  const audio = document.getElementById('bgmAudio');
+  if (audio.paused) { audio.play().catch(()=>{}); document.getElementById('bgmToggle').innerHTML = '&#9646;&#9646;'; }
+  else { audio.pause(); document.getElementById('bgmToggle').innerHTML = '&#9654;'; }
+}
+function stopBGM() {
+  const audio = document.getElementById('bgmAudio');
+  audio.pause(); audio.src = '';
+  document.getElementById('bgmToggle').innerHTML = '&#9654;';
+}
+function setBGMVolume(v) { document.getElementById('bgmAudio').volume = v/100; }
+
+// Hash routing
+function handleHashChange() {
+  const hash = window.location.hash;
+  if (hash.startsWith('#/album/')) {
+    const albumId = hash.replace('#/album/', '');
+    showAlbumPage(albumId);
+  } else if (!hash || hash === '#/' || hash === '#') {
+    showMainSite();
+  }
+}
+window.addEventListener('hashchange', handleHashChange);
+
+// =========================== NAV ===========================
+function scrollToSection(id) {
+  showMainSite();
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior:'smooth' });
+  }, 100);
+  if (window.innerWidth <= 1024) closeMobileNav();
+}
+function toggleMobileNav() { document.getElementById('nav').classList.toggle('mobile-open'); }
+function closeMobileNav() { document.getElementById('nav').classList.remove('mobile-open'); }
+
+// =========================== MODALS ===========================
+function openModal(type) {
+  const map = { register:'registerModal', submit:'submitModal', login:'loginModal' };
+  const id = map[type];
+  if (id) { document.getElementById(id).classList.add('active'); document.body.style.overflow = 'hidden'; }
+  closeMobileNav();
+}
+function closeModal(type) {
+  const map = { register:'registerModal', submit:'submitModal', login:'loginModal' };
+  const id = map[type];
+  if (id) { document.getElementById(id).classList.remove('active'); document.body.style.overflow = ''; }
+}
+function switchModal(from, to) { closeModal(from); setTimeout(() => openModal(to), 300); }
+
+document.querySelectorAll('.modal-overlay').forEach(ov => {
+  ov.addEventListener('click', function(e) { if (e.target === this) { this.classList.remove('active'); document.body.style.overflow = ''; } });
+});
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-overlay.active').forEach(o => o.classList.remove('active'));
+    document.querySelectorAll('.lightbox.active').forEach(o => o.classList.remove('active'));
+    document.body.style.overflow = '';
+  }
+});
+
+function showToast(msg) {
+  const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// =========================== AUTH ===========================
+function handleRegister(e) {
+  e.preventDefault();
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const password = document.getElementById('regPassword').value;
+  if (APP_DATA.users.find(u => u.email === email)) { showToast('该邮箱已注册'); return; }
+  APP_DATA.users.push({ name, email, phone, password, role:'member', registeredAt: new Date().toISOString() });
+  persist();
+  document.getElementById('registerForm').reset();
+  closeModal('register');
+  showToast('注册成功！欢迎加入。');
+  sendWelcomeEmail(name, email);
+}
+
+function sendWelcomeEmail(name, email) {
+  const cfg = APP_DATA.emailConfig;
+  if (!cfg.publicKey || !cfg.serviceId || !cfg.templateId) return;
+  try {
+    emailjs.init(cfg.publicKey);
+    emailjs.send(cfg.serviceId, cfg.templateId, {
+      to_name: name, to_email: email, from_name: cfg.fromName, reply_to: cfg.fromEmail,
+      message: '欢迎加入春·夏·秋·冬摄影社区！\n\n—— 王仁强'
+    }).then(() => console.log('[Email] 欢迎邮件已发送')).catch(() => {});
+  } catch(e) {}
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim();
+  const pw = document.getElementById('loginPassword').value;
+  const user = APP_DATA.users.find(u => u.email === email && u.password === pw);
+  if (user) {
+    document.getElementById('loginForm').reset();
+    closeModal('login');
+    showToast('登录成功！欢迎回来，'+user.name+'。');
+  } else { showToast('邮箱或密码错误'); }
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  APP_DATA.submissions.push({
+    id:'sub-'+Date.now(), name:document.getElementById('subName').value.trim(),
+    email:document.getElementById('subEmail').value.trim(),
+    season:document.getElementById('subSeason').value,
+    link:document.getElementById('subLink').value.trim(),
+    description:document.getElementById('subDesc').value.trim(),
+    status:'pending', createdAt: new Date().toISOString()
+  });
+  persist();
+  document.getElementById('submitForm').reset();
+  closeModal('submit');
+  showToast('投稿已成功提交！');
+}
+
+// =========================== ADMIN PANEL ===========================
+let adminAuthenticated = false;
+let adminRole = '';
+let adminTab = 'tab-dashboard';
+
+function getSidebarForRole() {
+  const links = [
+    { tab:'tab-dashboard', icon:'●', label:'仪表盘', roles:['admin','coadmin'] },
+    { tab:'tab-submissions', icon:'✎', label:'投稿管理', roles:['admin','coadmin'] },
+    { tab:'tab-photos', icon:'📷', label:'照片库', roles:['admin','coadmin'] },
+    { tab:'tab-albums', icon:'📑', label:'图集管理', roles:['admin'] },
+    { tab:'tab-gallery', icon:'🖼', label:'网站展示', roles:['admin'] },
+    { tab:'tab-users', icon:'👥', label:'用户管理', roles:['admin'] },
+    { tab:'tab-email', icon:'✉', label:'邮箱设置', roles:['admin'] },
+    { tab:'tab-settings', icon:'⚙', label:'系统设置', roles:['admin'] },
+  ];
+  return links.filter(l => l.roles.includes(adminRole));
+}
+
+function renderAdminSidebar() {
+  const sidebar = document.getElementById('adminSidebar');
+  const links = getSidebarForRole();
+  sidebar.innerHTML = links.map(l =>
+    `<a class="${adminTab===l.tab?'active':''}" data-tab="${l.tab}"><span>${l.icon}</span> ${l.label}</a>`
+  ).join('');
+  sidebar.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', function() {
+      adminTab = this.dataset.tab;
+      renderAdminSidebar();
+      renderAdminTab();
+    });
+  });
+}
+
+function openAdmin() {
+  if (adminAuthenticated) {
+    document.getElementById('adminOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    renderAdminSidebar();
+    renderAdminTab();
+  } else {
+    document.getElementById('adminLoginOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('adminLoginEmail').value = '';
+    document.getElementById('adminLoginPassword').value = '';
+  }
+  closeMobileNav();
+}
+
+function closeAdmin() {
+  document.getElementById('adminOverlay').classList.remove('active');
+  document.getElementById('adminLoginOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+  initSite();
+}
+
+function adminLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('adminLoginEmail').value.trim();
+  const pw = document.getElementById('adminLoginPassword').value;
+
+  if (email === APP_DATA.adminEmail && pw === APP_DATA.adminPassword) {
+    adminAuthenticated = true; adminRole = 'admin';
+    document.getElementById('adminLoginOverlay').classList.remove('active');
+    document.getElementById('adminOverlay').classList.add('active');
+    document.getElementById('adminUserLabel').textContent = '王仁强 · 超级管理员';
+    renderAdminSidebar(); renderAdminTab();
+  } else {
+    const coAdmin = APP_DATA.users.find(u => u.email === email && u.password === pw && u.role === 'coadmin');
+    if (coAdmin) {
+      adminAuthenticated = true; adminRole = 'coadmin';
+      document.getElementById('adminLoginOverlay').classList.remove('active');
+      document.getElementById('adminOverlay').classList.add('active');
+      document.getElementById('adminUserLabel').textContent = coAdmin.name + ' · 协助管理员';
+      renderAdminSidebar(); renderAdminTab();
+    } else {
+      showToast('账号或密码错误，或无管理权限');
+    }
+  }
+}
+
+function renderAdminTab() {
+  const content = document.getElementById('adminContent');
+  switch(adminTab) {
+    case 'tab-dashboard': content.innerHTML = renderDashboard(); break;
+    case 'tab-submissions': content.innerHTML = renderSubmissions(); break;
+    case 'tab-photos': content.innerHTML = renderPhotosManager(); break;
+    case 'tab-albums': content.innerHTML = renderAlbumsManager(); break;
+    case 'tab-gallery': content.innerHTML = renderGalleryManager(); break;
+    case 'tab-users': content.innerHTML = renderUsersManager(); break;
+    case 'tab-email': content.innerHTML = renderEmailSettings(); break;
+    case 'tab-settings': content.innerHTML = renderSettings(); break;
+  }
+  setTimeout(bindAdminEvents, 100);
+}
+
+// =========================== DASHBOARD ===========================
+function renderDashboard() {
+  const totalPhotos = APP_DATA.albums.reduce((s,a) => s+a.photos.length, 0);
+  const pendingSubs = APP_DATA.submissions.filter(s => s.status==='pending').length;
+  const totalUsers = APP_DATA.users.length;
+  const totalAlbums = APP_DATA.albums.length;
+  const emailReady = APP_DATA.emailConfig.publicKey && APP_DATA.emailConfig.serviceId && APP_DATA.emailConfig.templateId;
+  return `<h3>仪表盘</h3><p class="tab-desc">数据概览</p>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-num">${totalAlbums}</div><div class="stat-label">图集</div></div>
+      <div class="stat-card"><div class="stat-num">${totalPhotos}</div><div class="stat-label">照片</div></div>
+      <div class="stat-card"><div class="stat-num">${pendingSubs}</div><div class="stat-label">待审投稿</div></div>
+      <div class="stat-card"><div class="stat-num">${totalUsers}</div><div class="stat-label">会员</div></div>
+    </div>
+    <div class="admin-card"><h4>邮箱状态</h4>
+      <p style="font-size:.85rem;color:${emailReady?'var(--success)':'var(--danger)'};">${emailReady?'已配置 — 自动发送欢迎邮件':'未配置 — 请设置EmailJS'}</p>
+    </div>`;
+}
+
+// =========================== SUBMISSIONS ===========================
+function renderSubmissions() {
+  return `<h3>投稿管理</h3><p class="tab-desc">审核用户投稿</p>
+    <div class="admin-card">
+      <div style="display:flex;gap:.5rem;margin-bottom:1rem;">
+        <button class="btn btn-sm btn-outline" onclick="filterSubmissions('all')">全部</button>
+        <button class="btn btn-sm btn-outline" onclick="filterSubmissions('pending')">待审核</button>
+        <button class="btn btn-sm btn-outline" onclick="filterSubmissions('approved')">已通过</button>
+        <button class="btn btn-sm btn-outline" onclick="filterSubmissions('rejected')">已拒绝</button>
+      </div>
+      <div id="submissionsTable"></div>
+    </div>`;
+}
+function filterSubmissions(status) {
+  const subs = status==='all' ? APP_DATA.submissions : APP_DATA.submissions.filter(s=>s.status===status);
+  const html = subs.length===0 ? '<tr><td colspan="7" style="text-align:center;padding:2rem;color:var(--ink-muted);">暂无</td></tr>'
+    : subs.slice().reverse().map(s => `<tr>
+      <td>${escHtml(s.name)}</td><td>${escHtml(s.email)}</td><td>${seasonLabel(s.season)}</td>
+      <td><a href="${escHtml(s.link)}" target="_blank">查看</a></td>
+      <td>${escHtml(s.description||'').substring(0,30)}...</td>
+      <td><span class="badge badge-${s.status}">${statusLabel(s.status)}</span></td>
+      <td>${s.status==='pending'?`<button class="btn btn-sm btn-success" onclick="updateSubmission('${s.id}','approved')">通过</button> <button class="btn btn-sm btn-danger" onclick="updateSubmission('${s.id}','rejected')">拒绝</button>`:`<button class="btn btn-sm btn-outline" onclick="updateSubmission('${s.id}','pending')">重置</button>`}</td>
+    </tr>`).join('');
+  document.getElementById('submissionsTable').innerHTML = `<table class="admin-table"><thead><tr><th>作者</th><th>邮箱</th><th>主题</th><th>链接</th><th>说明</th><th>状态</th><th>操作</th></tr></thead><tbody>${html}</tbody></table>`;
+}
+function updateSubmission(id, status) {
+  const s = APP_DATA.submissions.find(x=>x.id===id);
+  if(s){s.status=status;persist();showToast(status==='approved'?'已通过':'已'+statusLabel(status));}
+  renderAdminTab();
+}
+
+// =========================== PHOTOS MANAGER (with drag/paste) ===========================
+let pendingUploads = [];
+
+function renderPhotosManager() {
+  const albums = APP_DATA.albums;
+  let html = `<h3>照片库</h3><p class="tab-desc">拖放或粘贴图片上传，管理所有照片</p>
+    <div class="admin-card">
+      <h4>上传照片</h4>
+      <div class="admin-form-row">
+        <div class="form-group"><label>目标图集</label><select id="photoAlbum">${albums.map(a=>`<option value="${a.id}">${escHtml(a.name)}</option>`).join('')}</select></div>
+        <div class="form-group"><label>照片标题</label><input type="text" id="photoTitle" placeholder="照片标题"></div>
+        <div class="form-group"><label>季节标签</label><select id="photoSeason"><option value="spring">春</option><option value="summer">夏</option><option value="autumn">秋</option><option value="winter">冬</option></select></div>
+      </div>
+      <div class="upload-zone" id="uploadZone">
+        <div class="upload-icon">&#128247;</div>
+        <p>拖放图片到此处，或 <strong>点击选择</strong></p>
+        <p class="upload-hint">也支持 Ctrl+V 粘贴剪贴板中的图片</p>
+        <input type="file" id="fileInput" accept="image/*" multiple style="display:none;">
+      </div>
+      <div class="upload-preview" id="uploadPreview"></div>
+      <button class="btn btn-primary btn-sm" onclick="uploadPendingPhotos()" id="uploadBtn" disabled style="margin-top:.5rem;">确认上传</button>
+    </div>`;
+
+  // Photo list per album
+  APP_DATA.albums.forEach(album => {
+    html += `<div class="admin-card"><h4>${escHtml(album.name)} <span style="font-weight:400;font-size:.75rem;color:var(--ink-muted);">(${album.photos.length}张)</span></h4>`;
+    if (album.photos.length === 0) {
+      html += '<p style="font-size:.8rem;color:var(--ink-muted);">暂无照片</p>';
+    } else {
+      html += '<div class="admin-photo-grid">';
+      album.photos.forEach(p => {
+        const otherAlbums = APP_DATA.albums.filter(a=>a.id!==album.id);
+        html += `<div class="admin-photo-card">
+          <div class="thumb" style="background-image:url(${p.url});${!p.url?'background:var(--paper-dark);':''}"></div>
+          <div class="info"><div class="title">${escHtml(p.title)}</div><div class="season">${seasonLabel(p.season)} · ${fmtDate(p.addedAt)}</div></div>
+          <div class="actions">
+            ${otherAlbums.length>0?`<select onchange="movePhoto('${p.id}','${album.id}',this.value);this.value='';" style="flex:1;font-size:.65rem;padding:.3rem;"><option value="">移至...</option>${otherAlbums.map(a=>`<option value="${a.id}">${escHtml(a.name)}</option>`).join('')}</select>`:''}
+            <button class="danger" onclick="deletePhoto('${album.id}','${p.id}')">删除</button>
+          </div></div>`;
+      });
+      html += '</div>';
+    }
+    html += '</div>';
+  });
+  return html;
+}
+
+function bindAdminEvents() {
+  const zone = document.getElementById('uploadZone');
+  const fileInput = document.getElementById('fileInput');
+  if (!zone || !fileInput) return;
+
+  zone.onclick = () => fileInput.click();
+  fileInput.onchange = e => { if (e.target.files) handleFiles(e.target.files); };
+
+  zone.ondragover = e => { e.preventDefault(); zone.classList.add('drag-over'); };
+  zone.ondragleave = () => zone.classList.remove('drag-over');
+  zone.ondrop = e => { e.preventDefault(); zone.classList.remove('drag-over'); if (e.dataTransfer.files) handleFiles(e.dataTransfer.files); };
+
+  document.onpaste = e => {
+    if (!adminAuthenticated || adminTab !== 'tab-photos') return;
+    const items = e.clipboardData?.items;
+    if (!items) return;
+    const imageItems = [];
+    for (let i=0; i<items.length; i++) {
+      if (items[i].type.startsWith('image/')) imageItems.push(items[i].getAsFile());
+    }
+    if (imageItems.length > 0) { e.preventDefault(); handleFiles(imageItems); showToast('已捕获剪贴板图片'); }
+  };
+}
+
+function handleFiles(files) {
+  Array.from(files).forEach(file => {
+    if (!file.type.startsWith('image/')) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      pendingUploads.push({ dataUrl: e.target.result, title: file.name.replace(/\.[^.]+$/,''), season: document.getElementById('photoSeason')?.value || 'spring' });
+      renderUploadPreview();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+function renderUploadPreview() {
+  const preview = document.getElementById('uploadPreview');
+  const btn = document.getElementById('uploadBtn');
+  if (!preview || !btn) return;
+  preview.innerHTML = pendingUploads.map((p,i) =>
+    `<div class="preview-item" style="background-image:url(${p.dataUrl});"><button class="remove" onclick="removePending(${i})">&times;</button></div>`
+  ).join('');
+  btn.disabled = pendingUploads.length === 0;
+}
+
+function removePending(i) { pendingUploads.splice(i,1); renderUploadPreview(); }
+
+async function uploadPendingPhotos() {
+  if (pendingUploads.length === 0) return;
+  const albumId = document.getElementById('photoAlbum').value;
+  const album = APP_DATA.albums.find(a=>a.id===albumId);
+  if (!album) return;
+
+  for (const p of pendingUploads) {
+    const photoId = 'photo-'+Date.now()+'-'+Math.random().toString(36).slice(2,8);
+    await saveImageToDB(photoId, p.dataUrl);
+    album.photos.push({
+      id: photoId, title: document.getElementById('photoTitle').value.trim() || p.title,
+      url: p.dataUrl, season: p.season, addedAt: new Date().toISOString()
+    });
+    if (!album.cover) album.cover = p.dataUrl;
+  }
+  const count = pendingUploads.length;
+  pendingUploads = [];
+  persist();
+  renderAdminTab();
+  renderUploadPreview();
+  showToast(`已上传 ${count} 张照片到「${album.name}」`);
+}
+
+function deletePhoto(albumId, photoId) {
+  const album = APP_DATA.albums.find(a=>a.id===albumId);
+  if (!album) return;
+  album.photos = album.photos.filter(p=>p.id!==photoId);
+  if (album.cover && !album.photos.find(p=>p.url===album.cover)) album.cover = album.photos[0]?.url || '';
+  deleteImageFromDB(photoId).catch(()=>{});
+  persist(); renderAdminTab(); showToast('已删除');
+}
+
+function movePhoto(photoId, fromAlbumId, toAlbumId) {
+  const from = APP_DATA.albums.find(a=>a.id===fromAlbumId);
+  const to = APP_DATA.albums.find(a=>a.id===toAlbumId);
+  if (!from||!to) return;
+  const idx = from.photos.findIndex(p=>p.id===photoId);
+  if (idx===-1) return;
+  const [photo] = from.photos.splice(idx,1);
+  to.photos.push(photo);
+  if (from.cover && !from.photos.find(p=>p.url===from.cover)) from.cover = from.photos[0]?.url||'';
+  if (!to.cover) to.cover = photo.url;
+  persist(); renderAdminTab(); showToast('已移动');
+}
+
+// =========================== ALBUMS MANAGER ===========================
+function renderAlbumsManager() {
+  if (adminRole !== 'admin') return '<h3>无权限</h3><p>仅超级管理员可管理图集</p>';
+  return `<h3>图集管理</h3><p class="tab-desc">创建与编辑图集</p>
+    <div class="admin-card"><h4>新建图集</h4>
+      <div class="admin-form-row">
+        <div class="form-group"><label>名称</label><input type="text" id="newAlbumName" placeholder="图集名称"></div>
+        <div class="form-group"><label>季节</label><select id="newAlbumSeason"><option value="spring">春</option><option value="summer">夏</option><option value="autumn">秋</option><option value="winter">冬</option></select></div>
+        <button class="btn btn-primary btn-sm" onclick="createAlbum()">创建</button>
+      </div>
+    </div>
+    <div class="admin-card"><h4>图集列表</h4>
+      <table class="admin-table"><thead><tr><th>名称</th><th>季节</th><th>照片数</th><th>BGM</th><th>操作</th></tr></thead><tbody>
+        ${APP_DATA.albums.map(a=>`<tr><td><strong>${escHtml(a.name)}</strong></td><td>${seasonLabel(a.season)}</td><td>${a.photos.length}</td>
+          <td>${a.bgm?'<span style="color:var(--success);">已设置</span>':'<span style="color:var(--ink-muted);">无</span>'}</td>
+          <td>
+            <button class="btn btn-sm btn-outline" onclick="editAlbumBGM('${a.id}')">BGM</button>
+            <button class="btn btn-sm btn-outline" onclick="deleteAlbum('${a.id}')" ${APP_DATA.albums.length<=1?'disabled':''}>删除</button>
+          </td></tr>`).join('')}
+      </tbody></table>
+      <div id="bgmEditArea"></div>
+    </div>`;
+}
+
+function createAlbum() {
+  const name = document.getElementById('newAlbumName').value.trim();
+  const season = document.getElementById('newAlbumSeason').value;
+  if (!name) { showToast('请输入名称'); return; }
+  APP_DATA.albums.push({ id:'album-'+Date.now(), name, season, cover:'', bgm:'', photos:[] });
+  persist(); renderAdminTab(); showToast('图集已创建');
+}
+
+function deleteAlbum(id) {
+  if (APP_DATA.albums.length<=1) { showToast('至少保留一个'); return; }
+  APP_DATA.albums = APP_DATA.albums.filter(a=>a.id!==id);
+  persist(); renderAdminTab(); showToast('已删除');
+}
+
+function editAlbumBGM(id) {
+  const album = APP_DATA.albums.find(a=>a.id===id);
+  if (!album) return;
+  const area = document.getElementById('bgmEditArea');
+  if (!area) return;
+  area.innerHTML = `<div class="admin-card" style="margin-top:1rem;"><h4>设置BGM — ${escHtml(album.name)}</h4>
+    <p style="font-size:.8rem;color:var(--ink-muted);margin-bottom:.5rem;">填入BGM音频文件的URL链接（支持mp3/ogg等格式），当用户打开该图集独立页面时将自动播放</p>
+    <div class="admin-form-row">
+      <div class="form-group"><label>BGM URL</label><input type="text" id="bgmUrl_${id}" value="${escHtml(album.bgm||'')}" placeholder="https://... 或相对路径"></div>
+      <button class="btn btn-primary btn-sm" onclick="saveBGM('${id}')">保存</button>
+      ${album.bgm?`<button class="btn btn-sm btn-outline" onclick="clearBGM('${id}')">清除</button>`:''}
+    </div>
+    <p style="font-size:.7rem;color:var(--ink-muted);">建议使用无版权音乐或自有版权音乐。推荐来源：<a href="https://pixabay.com/music/" target="_blank">Pixabay Music</a></p>
+    ${album.bgm?`<audio controls src="${escHtml(album.bgm)}" style="width:100%;margin-top:.5rem;"></audio>`:''}
+  </div>`;
+}
+
+function saveBGM(id) {
+  const album = APP_DATA.albums.find(a=>a.id===id);
+  if (!album) return;
+  album.bgm = document.getElementById('bgmUrl_'+id).value.trim();
+  persist(); renderAdminTab(); showToast('BGM已保存');
+}
+
+function clearBGM(id) {
+  const album = APP_DATA.albums.find(a=>a.id===id);
+  if (!album) return;
+  album.bgm = '';
+  persist(); renderAdminTab(); showToast('BGM已清除');
+}
+
+// =========================== GALLERY MANAGER ===========================
+function renderGalleryManager() {
+  if (adminRole !== 'admin') return '<h3>无权限</h3><p>仅超级管理员可管理网站展示</p>';
+  const seasons = ['spring','summer','autumn','winter'];
+  return `<h3>网站展示管理</h3><p class="tab-desc">设置首页四季跨页</p>
+    <div class="admin-card">
+      ${seasons.map(s=>`<div style="margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border);">
+        <h4>${seasonLabel(s)} 跨页</h4>
+        <div class="admin-form-row">
+          <div class="form-group"><label>背景图片URL</label><input type="text" id="spreadUrl_${s}" value="${escHtml(APP_DATA.spreadImages[s]||'')}" placeholder="留空使用默认"></div>
+          <button class="btn btn-sm btn-primary" onclick="saveSpread('${s}')">保存</button>
+          ${APP_DATA.spreadImages[s]?`<button class="btn btn-sm btn-danger" onclick="clearSpread('${s}')">清除</button>`:''}
+        </div>
+        <div class="form-group" style="margin-top:.5rem;"><label>描述文字</label><textarea id="spreadDesc_${s}" style="min-height:60px;">${escHtml(APP_DATA.spreadDescriptions[s]||'')}</textarea></div>
+      </div>`).join('')}
+    </div>`;
+}
+
+function saveSpread(s) {
+  APP_DATA.spreadImages[s] = document.getElementById('spreadUrl_'+s).value.trim();
+  APP_DATA.spreadDescriptions[s] = document.getElementById('spreadDesc_'+s).value.trim();
+  persist(); initSite(); showToast('已更新');
+}
+
+function clearSpread(s) {
+  APP_DATA.spreadImages[s] = '';
+  persist(); initSite(); renderAdminTab(); showToast('已清除');
+}
+
+// =========================== USERS MANAGER ===========================
+function renderUsersManager() {
+  if (adminRole !== 'admin') return '<h3>无权限</h3><p>仅超级管理员可管理用户</p>';
+  return `<h3>用户管理</h3><p class="tab-desc">管理会员角色与权限</p>
+    <div class="admin-card">
+      <table class="admin-table"><thead><tr><th>姓名</th><th>邮箱</th><th>手机</th><th>角色</th><th>注册时间</th><th>操作</th></tr></thead><tbody>
+        ${APP_DATA.users.length===0?'<tr><td colspan="6" style="text-align:center;padding:2rem;color:var(--ink-muted);">暂无用户</td></tr>'
+          :APP_DATA.users.slice().reverse().map(u=>`<tr>
+            <td>${escHtml(u.name)}</td><td>${escHtml(u.email)}</td><td>${escHtml(u.phone||'-')}</td>
+            <td><span class="badge badge-${u.role}">${roleLabel(u.role)}</span></td>
+            <td>${fmtDate(u.registeredAt)}</td>
+            <td>
+              ${u.role==='member'
+                ?`<button class="btn btn-sm btn-outline" onclick="setUserRole('${u.email}','coadmin')">设为协助管理员</button>`
+                :u.role==='coadmin'
+                ?`<button class="btn btn-sm btn-outline" onclick="setUserRole('${u.email}','member')">取消协助管理员</button>`
+                :'—'}
+            </td></tr>`).join('')}
+      </tbody></table>
+      <p style="font-size:.75rem;color:var(--ink-muted);margin-top:.5rem;">
+        协助管理员可以：审核投稿、上传与管理照片。不可以：管理图集、修改网站展示、管理用户、修改系统设置。
+      </p>
+    </div>`;
+}
+
+function setUserRole(email, role) {
+  const user = APP_DATA.users.find(u=>u.email===email);
+  if (!user) return;
+  user.role = role;
+  persist();
+  renderAdminTab();
+  showToast(role==='coadmin'?'已设为协助管理员':'已取消协助管理员权限');
+}
+
+// =========================== EMAIL SETTINGS ===========================
+function renderEmailSettings() {
+  if (adminRole !== 'admin') return '<h3>无权限</h3>';
+  const cfg = APP_DATA.emailConfig;
+  const ready = cfg.publicKey && cfg.serviceId && cfg.templateId;
+  return `<h3>邮箱设置</h3><p class="tab-desc">配置EmailJS自动发送欢迎邮件</p>
+    <div class="admin-card">
+      <ol style="font-size:.85rem;line-height:2;padding-left:1.2rem;color:var(--ink-light);">
+        <li>前往 <a href="https://www.emailjs.com/" target="_blank">EmailJS.com</a> 注册（每月200封免费）</li>
+        <li>添加Email Service（绑定QQ邮箱 2041902160@qq.com 或其它）</li>
+        <li>创建模板，变量：<code>to_name</code> <code>to_email</code> <code>from_name</code> <code>message</code></li>
+        <li>将 Public Key、Service ID、Template ID 填入下方</li>
+      </ol>
+    </div>
+    <div class="admin-card">
+      <div class="form-group"><label>Public Key</label><input type="text" id="cfgPublicKey" value="${escHtml(cfg.publicKey)}"></div>
+      <div class="form-group"><label>Service ID</label><input type="text" id="cfgServiceId" value="${escHtml(cfg.serviceId)}"></div>
+      <div class="form-group"><label>Template ID</label><input type="text" id="cfgTemplateId" value="${escHtml(cfg.templateId)}"></div>
+      <div class="form-group"><label>发件人名称</label><input type="text" id="cfgFromName" value="${escHtml(cfg.fromName)}"></div>
+      <button class="btn btn-primary" onclick="saveEmailConfig()">保存</button>
+      <button class="btn btn-outline" onclick="testEmail()" style="margin-left:.5rem;" ${!ready?'disabled':''}>发送测试邮件</button>
+      <p style="margin-top:1rem;font-size:.8rem;color:${ready?'var(--success)':'var(--danger)'};">${ready?'已就绪':'请完成配置'}</p>
+    </div>`;
+}
+
+function saveEmailConfig() {
+  APP_DATA.emailConfig.publicKey = document.getElementById('cfgPublicKey').value.trim();
+  APP_DATA.emailConfig.serviceId = document.getElementById('cfgServiceId').value.trim();
+  APP_DATA.emailConfig.templateId = document.getElementById('cfgTemplateId').value.trim();
+  APP_DATA.emailConfig.fromName = document.getElementById('cfgFromName').value.trim();
+  persist(); initEmailJS(); renderAdminTab(); showToast('已保存');
+}
+
+function testEmail() {
+  const cfg = APP_DATA.emailConfig;
+  if (!cfg.publicKey||!cfg.serviceId||!cfg.templateId){showToast('请先完成配置');return;}
+  try {
+    emailjs.init(cfg.publicKey);
+    emailjs.send(cfg.serviceId, cfg.templateId, {
+      to_name:'测试', to_email:cfg.fromEmail, from_name:cfg.fromName, reply_to:cfg.fromEmail,
+      message:'这是一封测试邮件。'
+    }).then(()=>showToast('测试邮件已发送')).catch(e=>showToast('失败：'+e.text));
+  } catch(e) { showToast('异常：'+e.message); }
+}
+
+// =========================== SETTINGS ===========================
+function renderSettings() {
+  if (adminRole !== 'admin') return '<h3>无权限</h3>';
+  return `<h3>系统设置</h3><p class="tab-desc">密码、数据与备份</p>
+    <div class="admin-card"><h4>修改管理员密码</h4>
+      <div class="admin-form-row">
+        <div class="form-group"><label>当前密码</label><input type="password" id="oldPassword"></div>
+        <div class="form-group"><label>新密码</label><input type="password" id="newPassword" placeholder="至少6位"></div>
+        <button class="btn btn-primary btn-sm" onclick="changePassword()">修改</button>
+      </div>
+    </div>
+    <div class="admin-card"><h4>数据备份</h4>
+      <p style="font-size:.8rem;color:var(--ink-muted);margin-bottom:1rem;">导出网站数据为JSON文件（不含图片），图片存储在浏览器IndexedDB中</p>
+      <button class="btn btn-outline btn-sm" onclick="exportData()">导出JSON备份</button>
+      <button class="btn btn-outline btn-sm" onclick="document.getElementById('importFile').click()" style="margin-left:.5rem;">导入恢复</button>
+      <input type="file" id="importFile" accept=".json" style="display:none;" onchange="importData(event)">
+    </div>
+    <div class="admin-card"><h4>危险操作</h4>
+      <button class="btn btn-danger btn-sm" onclick="resetAllData()">重置所有数据</button>
+    </div>`;
+}
+
+function changePassword() {
+  const old = document.getElementById('oldPassword').value;
+  const neu = document.getElementById('newPassword').value;
+  if (old!==APP_DATA.adminPassword){showToast('密码错误');return;}
+  if (neu.length<6){showToast('至少6位');return;}
+  APP_DATA.adminPassword = neu; persist(); showToast('密码已修改');
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(APP_DATA,null,2)],{type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'fourSeasons_backup_'+new Date().toISOString().slice(0,10)+'.json';
+  a.click(); showToast('已导出');
+}
+
+function importData(event) {
+  const file = event.target.files[0]; if(!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if(!imported.albums||!imported.submissions){showToast('无效格式');return;}
+      if(!confirm('导入将覆盖当前数据，确定？')) return;
+      APP_DATA = imported; persist(); initSite(); renderAdminTab(); showToast('导入成功');
+    } catch(err) { showToast('解析失败'); }
+  };
+  reader.readAsText(file); event.target.value = '';
+}
+
+function resetAllData() {
+  if(!confirm('确定重置所有数据？不可恢复！')) return;
+  if(!confirm('再次确认？')) return;
+  const pw = APP_DATA.adminPassword; const em = APP_DATA.adminEmail;
+  APP_DATA = getDefaultData(); APP_DATA.adminPassword = pw; APP_DATA.adminEmail = em;
+  persist(); initSite(); renderAdminTab(); showToast('已重置');
+}
+
+// =========================== HELPERS ===========================
+function escHtml(s){return s?String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'):'';}
+function seasonLabel(s){return({spring:'春',summer:'夏',autumn:'秋',winter:'冬',other:'其他'})[s]||s;}
+function statusLabel(s){return({pending:'待审核',approved:'已通过',rejected:'已拒绝'})[s]||s;}
+function roleLabel(r){return({member:'会员',coadmin:'协助管理员',admin:'超级管理员'})[r]||r;}
+function fmtDate(iso){if(!iso)return'-';const d=new Date(iso);return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
+
+// =========================== NAV OBSERVER ===========================
+const nav = document.getElementById('nav');
+const hero = document.querySelector('.hero');
+if (hero) {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) {
+        nav.style.background='rgba(250,248,245,.95)'; nav.style.backdropFilter='blur(20px)';
+        nav.style.mixBlendMode='normal'; nav.style.borderBottom='1px solid rgba(0,0,0,.06)';
+        nav.querySelectorAll('a,.nav-brand').forEach(el=>el.style.color='#1a1a1a');
+        nav.querySelectorAll('.nav-toggle span').forEach(el=>el.style.background='#1a1a1a');
+      } else {
+        nav.style.background='transparent'; nav.style.backdropFilter='none';
+        nav.style.mixBlendMode='difference'; nav.style.borderBottom='none';
+        nav.querySelectorAll('a,.nav-brand').forEach(el=>el.style.color='#fff');
+        nav.querySelectorAll('.nav-toggle span').forEach(el=>el.style.background='#fff');
+      }
+    });
+  }, {threshold:0.3});
+  observer.observe(hero);
+}
+
+// =========================== STARTUP ===========================
+initSite();
+if (window.location.hash && window.location.hash.startsWith('#/album/')) {
+  handleHashChange();
+}
+</script>
+</body>
+</html>
