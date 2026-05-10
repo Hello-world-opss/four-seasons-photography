@@ -1,12 +1,18 @@
 {
   "name": "four-seasons-photography",
   "version": "1.0.0",
-  "description": "春·夏·秋·冬 — 王仁强个人摄影网站",
-  "main": "server.js",
+  "description": "春·夏·秋·冬 — 王仁强个人摄影桌面应用",
+  "main": "main.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "electron .",
+    "build": "electron-builder --win",
+    "build:portable": "electron-builder --win portable"
   },
   "dependencies": {
     "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0"
   }
 }

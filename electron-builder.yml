@@ -1,0 +1,28 @@
+appId: com.fourseasons.photography
+productName: 春夏秋冬-王仁强摄影
+copyright: Copyright 2026 王仁强摄影
+directories:
+  output: dist
+  buildResources: build
+files:
+  - main.js
+  - preload.js
+  - data-manager.js
+  - image-store.js
+  - src/**/*
+  - node_modules/**/*
+  - package.json
+win:
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: build/icon.ico
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  shortcutName: 春夏秋冬 - 王仁强摄影
+extraMetadata:
+  main: main.js
