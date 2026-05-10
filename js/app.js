@@ -6,12 +6,28 @@ function getDefaultData() {
     emailConfig: { publicKey: '', serviceId: '', templateId: '', fromName: '春·夏·秋·冬', fromEmail: '2041902160@qq.com' },
     submissions: [],
     albums: [
-      { id: 'album-spring', name: '春 · 万物生', season: 'spring', cover: '', bgm: '', photos: [] },
-      { id: 'album-summer', name: '夏 · 炽热诗', season: 'summer', cover: '', bgm: '', photos: [] },
-      { id: 'album-autumn', name: '秋 · 落叶赋', season: 'autumn', cover: '', bgm: '', photos: [] },
-      { id: 'album-winter', name: '冬 · 寂静歌', season: 'winter', cover: '', bgm: '', photos: [] }
+      { id: 'album-spring', name: '春 · 万物生', season: 'spring', cover: 'photos/sample-spring-1.svg', bgm: '', photos: [
+        { id: 'sample-spring-1', title: '晨光·龙门山', url: 'photos/sample-spring-1.svg', season: 'spring', addedAt: '2026-05-10T00:00:00.000Z' },
+        { id: 'sample-spring-2', title: '樱花·洛河畔', url: 'photos/sample-spring-2.svg', season: 'spring', addedAt: '2026-05-10T00:00:00.000Z' },
+        { id: 'sample-spring-3', title: '新绿·生命序章', url: 'photos/sample-spring-3.svg', season: 'spring', addedAt: '2026-05-10T00:00:00.000Z' }
+      ]},
+      { id: 'album-summer', name: '夏 · 炽热诗', season: 'summer', cover: 'photos/sample-summer-1.svg', bgm: '', photos: [
+        { id: 'sample-summer-1', title: '暮色·天堂明堂', url: 'photos/sample-summer-1.svg', season: 'summer', addedAt: '2026-05-10T00:00:00.000Z' },
+        { id: 'sample-summer-2', title: '金晖·应天门', url: 'photos/sample-summer-2.svg', season: 'summer', addedAt: '2026-05-10T00:00:00.000Z' },
+        { id: 'sample-summer-3', title: '浓影·古城墙', url: 'photos/sample-summer-3.svg', season: 'summer', addedAt: '2026-05-10T00:00:00.000Z' }
+      ]},
+      { id: 'album-autumn', name: '秋 · 落叶赋', season: 'autumn', cover: 'photos/sample-autumn-1.svg', bgm: '', photos: [
+        { id: 'sample-autumn-1', title: '银杏·白马寺', url: 'photos/sample-autumn-1.svg', season: 'autumn', addedAt: '2026-05-10T00:00:00.000Z' },
+        { id: 'sample-autumn-2', title: '梧桐·老城巷', url: 'photos/sample-autumn-2.svg', season: 'autumn', addedAt: '2026-05-10T00:00:00.000Z' },
+        { id: 'sample-autumn-3', title: '红叶·禅意', url: 'photos/sample-autumn-3.svg', season: 'autumn', addedAt: '2026-05-10T00:00:00.000Z' }
+      ]},
+      { id: 'album-winter', name: '冬 · 寂静歌', season: 'winter', cover: 'photos/sample-winter-1.svg', bgm: '', photos: [
+        { id: 'sample-winter-1', title: '雪落·龙门石窟', url: 'photos/sample-winter-1.svg', season: 'winter', addedAt: '2026-05-10T00:00:00.000Z' },
+        { id: 'sample-winter-2', title: '冰封·洛河', url: 'photos/sample-winter-2.svg', season: 'winter', addedAt: '2026-05-10T00:00:00.000Z' },
+        { id: 'sample-winter-3', title: '寂静·古都', url: 'photos/sample-winter-3.svg', season: 'winter', addedAt: '2026-05-10T00:00:00.000Z' }
+      ]}
     ],
-    spreadImages: { spring: '', summer: '', autumn: '', winter: '' },
+    spreadImages: { spring: 'photos/sample-spring-1.svg', summer: 'photos/sample-summer-1.svg', autumn: 'photos/sample-autumn-1.svg', winter: 'photos/sample-winter-1.svg' },
     spreadDescriptions: {
       spring: '万物复苏，光影在嫩绿间流转。洛阳的春天从龙门山的第一缕晨光开始，到洛河畔的樱花雨落下。每一帧都是生命的序章，每一次快门都是与自然的低语。',
       summer: '烈日下的浓影，暮色中的金色时刻。洛阳的夏日，是天堂明堂在夕阳下的剪影，是应天门广场的热浪蒸腾。镜头里的夏天，炽热而纯粹。',

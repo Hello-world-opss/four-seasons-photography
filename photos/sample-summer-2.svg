@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+<defs>
+  <linearGradient id="sky-sample_summer_2" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#f0ddb8"/>
+    <stop offset="60%" stop-color="#d4a84c"/>
+    <stop offset="100%" stop-color="#f0ddb8"/>
+  </linearGradient>
+  <radialGradient id="sun-sample_summer_2" cx="70%" cy="25%" r="35%">
+    <stop offset="0%" stop-color="#f0a060" stop-opacity="0.35"/>
+    <stop offset="100%" stop-color="#f0a060" stop-opacity="0"/>
+  </radialGradient>
+  <radialGradient id="acc-sample_summer_2" cx="25%" cy="70%" r="40%">
+    <stop offset="0%" stop-color="#e8d0a8" stop-opacity="0.3"/>
+    <stop offset="100%" stop-color="#e8d0a8" stop-opacity="0"/>
+  </radialGradient>
+</defs>
+<rect width="800" height="600" fill="url(#sky-sample_summer_2)"/>
+<rect width="800" height="600" fill="url(#sun-sample_summer_2)"/>
+<rect width="800" height="600" fill="url(#acc-sample_summer_2)"/>
+<path d="M0 600 L120 380 L280 420 L450 320 L600 400 L750 340 L800 480 L800 600 Z" fill="#f0ddb8" opacity="0.35"/>
+<path d="M0 600 L200 450 L350 480 L520 400 L680 460 L800 420 L800 600 Z" fill="#d4a84c" opacity="0.2"/>
+<rect x="0" y="480" width="800" height="120" fill="#d4a84c" opacity="0.1"/>
+</svg>
